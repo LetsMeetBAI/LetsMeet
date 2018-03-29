@@ -1,11 +1,11 @@
 
 Witamy W aplikacji LetsMeet!
 
-Skład projektu:
-Justyna Stadnik
-Bartosz Kowalski
-Igor Kubrak
-Krzysztof Kłos
+<br>Skład projektu: </br>
+<br>Justyna Stadnik </br>
+<br>Bartosz Kowalski </br>
+<br>Igor Kubrak </br>
+<br>Krzysztof Kłos</br>
 
 
 ### Więcej wkrótce!
