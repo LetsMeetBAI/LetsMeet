@@ -45,9 +45,6 @@ function facelogin(){
 	var provider = new firebase.auth.FacebookAuthProvider();
 	firebase.auth().signInWithPopup(provider).then(function(result) {
   var token = result.credential.accessToken;
-	document.getElementById('quickstart-oauthtoken').textContent = token;
-        } else {
-          document.getElementById('quickstart-oauthtoken').textContent = 'null';
         }
   var user = result.user;
 
