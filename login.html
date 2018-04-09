@@ -1,6 +1,10 @@
 <html>
 <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <title>LetsMeet</title>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-database.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -11,7 +15,7 @@
     <input type="email" placeholder="Email..." id="email_field" />
     <input type="password" placeholder="Password..." id="password_field" />
 
-    <button onclick="login()">Login to Account</button>
+    <button onclick="login()">Login with E-mail</button>
 	<p></p>
 	<button onclick="register()">Register</button>
 	<p></p>
@@ -21,46 +25,11 @@
   </div>
   <div id="user_div" class="loggedin-div">
     <h3>Welcome User</h3>
-    <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+	<p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+	<button onclick="letsmeet()">Lets Meet</button>
+	<p></p>
     <button onclick="logout()">Logout</button>
   </div>
-
-
-
-  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-    apiKey: "AIzaSyCi9qKsxA_u2g5RAdsQcLP4RgeZmSgdv-g",
-    authDomain: "bai-letsmeet.firebaseapp.com",
-    databaseURL: "https://bai-letsmeet.firebaseio.com",
-    projectId: "bai-letsmeet",
-    storageBucket: "bai-letsmeet.appspot.com",
-    messagingSenderId: "1052129660767"
-    };
-    firebase.initializeApp(config);
-  </script>
-  <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1583806705075141',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{latest-api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
   <script src="index.js"></script>
 
 </body>
