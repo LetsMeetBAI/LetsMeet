@@ -9,7 +9,6 @@
     messagingSenderId: "688044304067"
     };
     firebase.initializeApp(config);
-	var ref = firebase.database().ref();   
 }());
 
 
@@ -17,6 +16,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById("user_div").style.display = "block";
     document.getElementById("login_div").style.display = "none";
+	document.getElementById("meet_div").style.display = "none";
 
     var user = firebase.auth().currentUser;
 
@@ -35,13 +35,17 @@ firebase.auth().onAuthStateChanged(function(user) {
   } else {
     document.getElementById("user_div").style.display = "none";
     document.getElementById("login_div").style.display = "block";
+	document.getElementById("meet_div").style.display = "none";
   }
 });
 function letsmeet(){
 	window.location.replace('addmeeting.html');
 }
 function tologinpage(){
-	window.location.replace('login.html');
+	//window.location.replace('login.html');
+	document.getElementById("user_div").style.display = "none";
+    document.getElementById("login_div").style.display = "none";
+	document.getElementById("meet_div").style.display = "block";
 }
 function toindexpage(){
 	window.location.replace('index.html');
@@ -167,6 +171,7 @@ function addmeeting1(){
 }
 
 function addmeeting(){
+	
 	var ref = firebase.database().ref();
 	var user = firebase.auth().currentUser;
 	var meetUser = document.getElementById("meet_user").value;
@@ -175,7 +180,7 @@ function addmeeting(){
 	var meetEndDate = document.getElementById("meet_until").value;
 	var meetText = document.getElementById("meet_text").value;
 	var meetLocation = document.getElementById("meet_location").value;
-
+window.location.replace('addmeeting.html');
 	var postsRef = ref.child("meetings");
   var newPostRef = postsRef.push();
   newPostRef.set({
@@ -186,5 +191,4 @@ function addmeeting(){
     Lokalizacji: [meetLocation],
     Autor: [meetUser],	
   });
-  
 }
