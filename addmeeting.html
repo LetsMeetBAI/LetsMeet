@@ -5,36 +5,43 @@
   <title>LetsMeet</title>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-database.js"></script>
+  
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
+  <script src="index.js"></script>
   <div id="login_div" class="main-div">
     <h3>Let's Meet!</h3>
     <button onclick="tologinpage()">Login to Account</button>
 
   </div>
+  
   <div id="user_div" class="loggedin-div">
     <h3>Lets Meet!</h3>
 	<p id="user_para"></p>
 	
-	
-	<pre id="object"></pre>
-	
-	
-	
-	<button onclick="showmeet()">Dostępne Spotkania</button>
+	<h4></h4>
+	<input type="text" placeholder="Nazwa użytkownika" id="meet_user"  />
 	<p></p>
-	<button onclick="showevent()">Wydarzenia w Twojej okolicy</button>
+	<input type="text" placeholder="Tytuł spotkania" id="meet_name" />
 	<p></p>
-	<button onclick="addevent()">Dodaj nowe wydarzenie</button>
+	Ważne od...<input type="datetime-local"  id="meet_from" />
 	<p></p>
-    <button onclick=window.location.replace('addmeeting-meet.html')>Dodaj nowe spotkanie</button>
+	Ważne do...<input type="datetime-local"  id="meet_until" />
+	<p></p>
+	<textarea rows="4" cols="50" placeholder="Krótki opis" id="meet_text" /></textarea>
+	<p></p>
+	<input type="text" placeholder="Lokalizacja" id="meet_location" />
+	<p></p>
+	<button onclick="addmeeting()">Zapisz Spotkanie</button>
+	<p></p>
+	<button onclick="toindexpage()">Wstecz</button>
+	<p></p>
 	<p></p>
 	<button onclick="logout()">Logout</button>
   </div>
-  <script src="index.js"></script>
+
 
 </body>
 </html>
