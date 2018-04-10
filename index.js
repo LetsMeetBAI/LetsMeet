@@ -1,4 +1,17 @@
 
+(function(){
+	   const config = {
+    apiKey: "AIzaSyAxteQnfJWDilWg9SoCPX9kpB3RkTutde4",
+    authDomain: "letmeet-bai.firebaseapp.com",
+    databaseURL: "https://letmeet-bai.firebaseio.com",
+    projectId: "letmeet-bai",
+    storageBucket: "letmeet-bai.appspot.com",
+    messagingSenderId: "688044304067"
+    };
+    firebase.initializeApp(config);
+}());
+
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById("user_div").style.display = "block";
@@ -27,6 +40,11 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 function letsmeet(){
 	window.location.replace('addmeeting.html');
+	
+}
+function addeventpage(){
+	window.location.replace('addevent.html');
+	
 }
 function tologinpage(){
 	//window.location.replace('login.html');
@@ -124,37 +142,36 @@ function logout(){
   firebase.auth().signOut();
 }
 function addevent(){
-	function writeNewPost(uid, username, picture, title, body) {
-  // A post entry.
-  var postData = {
-    author: username,
-    uid: uid,
-    body: body,
-    title: title,
-    starCount: 0,
-    authorPic: picture
-  };
+	
+	var ref = firebase.database().ref();
+	var user = firebase.auth().currentUser;
+	var eventUser = document.getElementById("event_user").value;
+	var eventName = document.getElementById("event_name").value;
+	var eventStartDate = document.getElementById("event_from").value;
+	var eventEndDate = document.getElementById("event_until").value;
+	var eventText = document.getElementById("event_text").value;
+	var eventLocation = document.getElementById("event_location").value;
+	var eventLink = document.getElementById("event_link").value;
 
-  // Get a key for a new Post.
-  var newPostKey = firebase.database().ref().child('meetings').push().key;
-
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
-  updates['/posts/' + newPostKey] = postData;
-  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-
-  return firebase.database().ref().update(updates);
-}
-}
-function addmeeting1(){
-	var ref = firebase.database().ref(); 
-	var postsRef = ref.child("meetings");
+	var postsRef = ref.child("events");
   var newPostRef = postsRef.push();
   newPostRef.set({
-    author: "gracehop",
-    title: "Announcing COBOL, a New Programming Language"
-
-});	
+    Nazwa: [eventName],
+    DataOd: [eventStartDate],
+    DataDo: [eventEndDate],
+    Opis: [eventText],
+    Lokalizacji: [eventLocation],
+    Autor: [eventUser],	
+	Link: [eventLink]
+  }, function(error){
+            if (error) {
+             console.error(error)
+             return
+            }
+            window.location.replace('index.html');
+            //add upload function here
+			window.alert("Wydarzenie dodane");
+        });
 }
 
 function addmeeting(){
@@ -167,9 +184,10 @@ function addmeeting(){
 	var meetEndDate = document.getElementById("meet_until").value;
 	var meetText = document.getElementById("meet_text").value;
 	var meetLocation = document.getElementById("meet_location").value;
-window.location.replace('addmeeting.html');
+
 	var postsRef = ref.child("meetings");
   var newPostRef = postsRef.push();
+
   newPostRef.set({
     Nazwa: [meetName],
     DataOd: [meetStartDate],
@@ -177,5 +195,29 @@ window.location.replace('addmeeting.html');
     Opis: [meetText],
     Lokalizacji: [meetLocation],
     Autor: [meetUser],	
-  });
+  }, function(error){
+            if (error) {
+             console.error(error)
+             return
+            }
+            window.location.replace('index.html');
+            //add upload function here
+			window.alert("Spotkanie dodane");
+        });
+}
+function showmeet(){
+	var leadsRef = database.ref('meetings');
+leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+    });
+});
+}
+function showevent(){
+	var leadsRef = database.ref('events');
+leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+    });
+});
 }
