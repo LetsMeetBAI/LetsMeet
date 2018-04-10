@@ -1,17 +1,4 @@
 
-(function(){
-	   const config = {
-    apiKey: "AIzaSyAxteQnfJWDilWg9SoCPX9kpB3RkTutde4",
-    authDomain: "letmeet-bai.firebaseapp.com",
-    databaseURL: "https://letmeet-bai.firebaseio.com",
-    projectId: "letmeet-bai",
-    storageBucket: "letmeet-bai.appspot.com",
-    messagingSenderId: "688044304067"
-    };
-    firebase.initializeApp(config);
-}());
-
-
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById("user_div").style.display = "block";
