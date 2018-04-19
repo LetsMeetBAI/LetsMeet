@@ -1,17 +1,13 @@
-
-(function(){
-	   const config = {
+    const config = {
     apiKey: "AIzaSyAxteQnfJWDilWg9SoCPX9kpB3RkTutde4",
     authDomain: "letmeet-bai.firebaseapp.com",
     databaseURL: "https://letmeet-bai.firebaseio.com",
     projectId: "letmeet-bai",
     storageBucket: "letmeet-bai.appspot.com",
     messagingSenderId: "688044304067"
-    };
+	};    
     firebase.initializeApp(config);
-}());
-
-
+	
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById("user_div").style.display = "block";
@@ -44,6 +40,43 @@ function letsmeet(){
 }
 function addeventpage(){
 	window.location.replace('addevent.html');
+	
+}
+function userinfopage(){
+	window.location.replace('editprofile.html');
+	//var p1 = new Promise((resolve,reject)=>{
+	//document.getElementById("edituser_div").style.display = "block";
+	//document.getElementById("showuser_div").style.display = "none";
+	//});
+	//p1.then(function(){
+	//window.location.replace('editprofile.html');
+	//});
+}
+function edituserinfo(){
+	document.getElementById("edituser_div").style.display = "block";
+	document.getElementById("showuser_div").style.display = "none";
+	document.getElementById("user_div").style.display = "none";
+}
+function showuserinfo(){
+	document.getElementById("edituser_div").style.display = "none";
+	document.getElementById("showuser_div").style.display = "block";
+	document.getElementById("user_div").style.display = "none";
+	var database = firebase.database();
+	var userId = firebase.auth().currentUser.uid;
+	return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+	var username_profile = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+	var hobby_profile = (snapshot.val() && snapshot.val().hobby ) || 'Anonymous';
+	var języki_profile = (snapshot.val() && snapshot.val().języki) || 'Anonymous';
+	var płeć_profile = (snapshot.val() && snapshot.val().płeć) || 'Anonymous';
+	document.getElementById("username_profile").innerHTML=username_profile;
+	document.getElementById("hobby_profile").innerHTML=hobby_profile;
+	document.getElementById("języki_profile").innerHTML=języki_profile;
+	document.getElementById("płeć_profile").innerHTML=płeć_profile;
+	//console.log(username); //działa!
+	//console.log(hobby);
+	//console.log(języki);
+	//console.log(płeć);
+	});
 	
 }
 function tologinpage(){
@@ -215,9 +248,39 @@ leadsRef.on('value', function(snapshot) {
 }
 function showevent(){
 	var leadsRef = database.ref('events');
-leadsRef.on('value', function(snapshot) {
+	leadsRef.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       var childData = childSnapshot.val();
     });
 });
 }
+function userinfo(){
+	firebase.auth().onAuthStateChanged((user) => {
+	if (user) {
+	var ref = firebase.database().ref();
+	var database = firebase.database();
+	var UserName = document.getElementById("UserName").value;
+	var plec = document.getElementById("sex").value;
+	var hobby = document.getElementById("hobby");
+	var jezyki = document.getElementById("languages");
+    var selected1 = [];
+	var selected2 = [];
+    for (var i = 0; i < jezyki.length; i++) {
+        if (jezyki.options[i].selected) selected1.push(jezyki.options[i].value);
+    }
+	for (var i = 0; i < hobby.length; i++) {
+        if (hobby.options[i].selected) selected2.push(hobby.options[i].value);
+    }
+	console.log(selected1);
+	firebase.database().ref('users/' + user.uid).set({
+    username: UserName,
+    płeć:plec,
+	hobby:selected2,
+	języki:selected1	
+  });
+  
+};
+})
+}
+
+
