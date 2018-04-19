@@ -18,7 +18,4 @@
 	<allow-navigation href="*" />
 	<allow-intent href="*" />
 	</gap:plugin>
-	<gap:plugin name="cordova-plugin-googleplus" source="npm">
-	<param name="REVERSED_CLIENT_ID" value="myreversedclientid" />
-	</gap:plugin>
 </widget>
