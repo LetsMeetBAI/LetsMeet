@@ -20,10 +20,6 @@
 	<preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
 	<preference name="AndroidLaunchMode" value="singleTask" />
-	<plugin name="cordova-plugin-device" spec="2.0.1" />
-	<plugin name="cordova-plugin-dialogs" spec="2.0.1" />
-	<plugin name="cordova-plugin-browsertab" spec="2.0.1" />
-	<plugin name="cordova-plugin-inappbrowser" spec="2.0.1" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	<access origin="*" />
 	<allow-navigation href="*" />
