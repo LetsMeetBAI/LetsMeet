@@ -10,7 +10,7 @@
 		Bartosz Kowalski
 	</author>
 	<universal-links>
-    <host name="https://letmeet-bai.firebaseio.com/ " scheme="https" />
+    <host name="https://yn232.app.goo.gl" scheme="https" />
     <host name="letmeet-bai.firebaseapp.com" scheme="https">
     <path url="/__/auth/callback"/>
     </host>
