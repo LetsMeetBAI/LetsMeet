@@ -22,7 +22,6 @@
 	<preference name="AndroidLaunchMode" value="singleTask" />
 	<plugin name="cordova-plugin-device" spec="2.0.1" />
 	<plugin name="cordova-plugin-dialogs" spec="2.0.1" />
-	<plugin name="cordova-universal-links-plugin" spec="2.0.1" />
 	<plugin name="cordova-plugin-browsertab" spec="2.0.1" />
 	<plugin name="cordova-plugin-inappbrowser" spec="2.0.1" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
