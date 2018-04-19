@@ -17,5 +17,4 @@
 	<access origin="*" />
 	<allow-navigation href="*" />
 	<allow-intent href="*" />
-	</gap:plugin>
 </widget>
