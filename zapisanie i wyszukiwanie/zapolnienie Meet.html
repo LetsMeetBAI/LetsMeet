@@ -1,0 +1,42 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Firebase web dannyje</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+<body>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+
+<script src="zapolnienie hd.js"></script>
+
+
+
+Title : <input type="text" id="EventTitle"><br>
+<br>
+Location : <input type="text" id="EventLoc"><br>
+<br>
+Link : <input type="text" id="EventLink"><br>
+<br>
+Date : <input type="text" id="EventDate"><br>
+<br>
+DateTime : <input type="text" id="EventTime"><br>
+<br>
+UserN : <input type="text" id="EventUName"><br>
+<br>
+Email : <input type="text" id="Email"><br>
+<br>
+Phone : <input type="text" id="Phone"><br>
+<br>
+<button id="BtnSave" onclick='addmeeting("EventTitle","EventLoc","EventLink","EventUName","EventDate","EventTime","Email","Phone")'>Save Meetings</button>
+<p></p>
+<p></p>
+Find Meets : <input type ="text" id='Location'><br>
+<p></p>
+<button id="find_button" onclick='findmeet("Title")'>FIND Meets</button>
+<p></p>
+Events : <textarea id="Result"></textarea><br>
+</body>
+</html>
