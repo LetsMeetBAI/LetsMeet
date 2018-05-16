@@ -1,0 +1,72 @@
+<html>
+<head>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+		<meta http-equiv="Content-Security-Policy" content="script-src * data: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	
+		<title>LetsMeet</title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+  <script src="index1.js"></script>
+  <div class="main_wrap">
+  <div class="stickhead">
+        <a href="" id="userinfopagebtn"><img src="img/set.png" alt="">Settings</a>
+        <a href="" id="logoutbtn"><img src="img/user.png" alt="">log out</a>
+   </div> 
+  <div id="login_div" class="main-div">
+    <h3>Let's Meet!</h3>
+    <button class="btn" id="tologinbtn">Login to Account</button>
+  </div>
+	<div id="user_div" class="loggedin-div">
+    <h3>Lets Meet!</h3>
+	<p id="user_para"></p>
+	
+	<h4></h4>
+	<input type="text" placeholder="Nazwa użytkownika" id="event_user"  />
+	<p></p>
+	<input type="text" placeholder="Tytuł wydarzenia" id="event_name" />
+	<p></p>
+	<input type="text"  id="event_from" placeholder="Ważne od...">
+	<p></p>
+	<input type="text"  id="event_until" placeholder="Ważne do...">
+	<p></p>
+	<textarea rows="4" cols="50" placeholder="Krótki opis" id="event_text" /></textarea>
+	<p></p>
+	<input type="text" placeholder="Lokalizacja" id="event_location" />
+	<p></p>
+	<input type="text" placeholder="Link do wydarzenia" id="event_link" />
+	<p></p>
+	<input type+"text" placeholder="Cena" id
+	<p></p>
+	<button class="btn" onclick="addevent()">Zapisz Wydarzenie</button>
+	<p></p>
+	<button class="btn" onclick="toindexpage()">Wstecz</button>
+	<p></p>
+	<p></p>
+	<!-- <button class="btn" onclick="logout()">Logout</button> -->
+	</div>
+</div>
+</body>
+<script>
+  var dtt = document.getElementById('event_from')
+  dtt.onfocus = function (event) {
+      this.type = 'datetime-local';
+      this.focus();
+  }
+</script>
+<script>
+  var dtt = document.getElementById('event_until')
+  dtt.onfocus = function (event) {
+      this.type = 'datetime-local';
+      this.focus();
+  }
+</script>
+</html>
