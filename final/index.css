@@ -226,6 +226,7 @@ img{
     background-size: 2em 2em, 100%;
     background-color: yellowgreen;
   border-radius:16px;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
   width:320px;
   height:auto;
   display: inline-block;
