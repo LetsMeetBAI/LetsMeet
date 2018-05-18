@@ -11,10 +11,8 @@ Aplikacja jest skierowana do osób, które przyjeżdżają do obcego miasta i za
 <br>Igor Kubrak
 <br>Krzysztof Kłos
 
-<br>Link do prototypu:
-<br>https://github.com/LetsMeetBAI/LetsMeet/blob/master/LetsMeet.pdf
+<br><p><a href="https://github.com/LetsMeetBAI/LetsMeet/blob/master/LetsMeet.pdf">Link do prototypu
 
-<br>Link do Trello:
-<br>https://trello.com/b/y8X8UsU0/aplikacja-letsmeet
-
+<br><p><a href="https://trello.com/b/y8X8UsU0/aplikacja-letsmeet"> Link do Trello
+  
 <br>Link do Raportu prac członków zespołu
