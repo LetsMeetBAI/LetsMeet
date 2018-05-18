@@ -12,8 +12,8 @@
 <br>Igor Kubrak
 <br>Krzysztof Kłos
 
-<br><p><a href="https://github.com/LetsMeetBAI/LetsMeet/blob/master/LetsMeet.pdf">Link do prototypu
+<br><a href="https://github.com/LetsMeetBAI/LetsMeet/blob/master/LetsMeet.pdf">Link do prototypu
 
-<br><p><a href="https://trello.com/b/y8X8UsU0/aplikacja-letsmeet"> Link do Trello
+<br><a href="https://trello.com/b/y8X8UsU0/aplikacja-letsmeet"> Link do Trello
   
 <br>Link do Raportu prac członków zespołu
