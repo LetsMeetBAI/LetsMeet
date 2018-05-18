@@ -2,9 +2,8 @@
 <br><b>Opis projektu:</b>
 <br>Aplikacja jest skierowana do osób, które przyjeżdżają do obcego miasta i zamiast klasycznego przewodnika chcieliby poznać miasto z osobą, która żyje tam na co dzień. 
 <br>Tworzony jest profil użytkownika podając płeć, znajomości języków oraz hobby.
-<br>Istnieje również możliwość zobaczenia profilu użytkownika wraz z miejscami, które poleca w mieście. 
 <br>Aplikacja może być rozszerzona również o wspólne wyjazdy na narty, w góry, wyjścia na kręgle itd. 
-<br>Będzie można dodawać również ciekawe wydarzenia odbywające się okolicy.
+<br>Zaimplementowa jest możliwość dodawania ciekawych wydarzeń odbywających się okolicy.
 
 <br><b>Skład zespołu projektowego:</b>
 <br>Bartosz Kowalski
