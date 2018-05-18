@@ -1,22 +1,5 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-  var config = {
+var config = {
     apiKey: "AIzaSyAxteQnfJWDilWg9SoCPX9kpB3RkTutde4",
     authDomain: "letmeet-bai.firebaseapp.com",
     databaseURL: "https://letmeet-bai.firebaseio.com",
@@ -25,22 +8,15 @@
     messagingSenderId: "688044304067"
   };
   firebase.initializeApp(config);
-  //var firebase = require("firebase");
+ */
 var app = {
-    // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
-
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
     },
 
-    // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
@@ -80,17 +56,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-document.getElementById("loginbtn").addEventListener("click", login);
-document.getElementById("tologinbtn").addEventListener("click", tologinpage);
-document.getElementById("registerbtn").addEventListener("click", register);
-document.getElementById("googloginbtn").addEventListener("click", googlogin);
-document.getElementById("faceloginbtn").addEventListener("click", facelogin);
-document.getElementById("userinfopagebtn").addEventListener("click", userinfopage);
-document.getElementById("showeventbtn").addEventListener("click", showevent);
-document.getElementById("addeventpagebtn").addEventListener("click", addeventpage);
-document.getElementById("letsmeetbtn").addEventListener("click", letsmeet);
-document.getElementById("logoutbtn").addEventListener("click", logout);
-
 function letsmeet(){
 	window.location.replace('addmeeting.html');
 	
@@ -101,13 +66,8 @@ function addeventpage(){
 }
 function userinfopage(){
 	window.location.replace('editprofile.html');
-	//var p1 = new Promise((resolve,reject)=>{
 	//document.getElementById("edituser_div").style.display = "block";
 	//document.getElementById("showuser_div").style.display = "none";
-	//});
-	//p1.then(function(){
-	//window.location.replace('editprofile.html');
-	//});
 }
 function edituserinfo(){
 	document.getElementById("edituser_div").style.display = "block";
@@ -132,11 +92,37 @@ function showuserinfo(){
 	});
 	
 }
+function editprofajl(){
+	document.getElementById("edituser_div").style.display = "none";
+	document.getElementById("showuser_div").style.display = "none";
+	document.getElementById("user_div").style.display = "block";
+	document.getElementById("show_events").style.display = "none";
+}
+function showuserevents(){
+	document.getElementById("edituser_div").style.display = "none";
+	document.getElementById("showuser_div").style.display = "none";
+	document.getElementById("user_div").style.display = "none";
+	document.getElementById("show_events").style.display = "block";
+	readevents();
+}
+
+
 function tologinpage(){
 	//window.location.replace('login.html');
 	document.getElementById("user_div").style.display = "none";
     document.getElementById("login_div").style.display = "none";
 	document.getElementById("meet_div").style.display = "block";
+}
+
+function showeventpage(){
+	var test =1;
+	window.location.replace('showevent.html');
+	if (test !=null){
+	showevents1();
+	}
+}
+function Doindex2(){
+	window.location.replace('index2.html');
 }
 function toindexpage(){
 	window.location.replace('index.html');
@@ -149,7 +135,6 @@ function login(){
     var errorMessage = error.message;
     window.alert("Error : " + errorMessage);
    });
-	//toindexpage();
 }
 function register(){
 
@@ -161,100 +146,41 @@ function register(){
     window.alert("Error : " + errorMessage);
   });
 
-}function checkLoginState() {
+}
+function checkLoginState() {
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
   });
 }
-function facelogintest(){
-	FB.init({
-    appId      : '1583806705075141',
-    cookie     : true,
-    xfbml      : true,
-    version    : 'v2.6'
-    });     
-	
-	FB.Event.subscribe('auth.authResponseChange', checkLoginState);
-	function checkLoginState(event) {
-	if (event.authResponse) {
-    // User is signed-in Facebook.
-    var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
-      unsubscribe();
-      // Check if we are already signed-in Firebase with the correct user.
-      if (!isUserEqual(event.authResponse, firebaseUser)) {
-        // Build Firebase credential with the Facebook auth token.
-        var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
-        // Sign in with the credential from the Facebook user.
-        firebase.auth().signInWithCredential(credential).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-		  console.log("heh");
-        });
-      } else {
-        // User is already signed-in Firebase with the correct user.
-      }
+
+function Googlelogin() {
+    firebase.auth().onAuthStateChanged( function(user){
+        if(user) {
+            login(user);
+        } else {
+            var provider = new  firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
     });
-  } else {
-    // User is signed-out of Facebook.
-    firebase.auth().signOut();
-  }
 }
-}
-function facelogin(){
-	var provider = new firebase.auth.FacebookAuthProvider();
-	firebase.auth().signInWithPopup(provider).then(function(result) {
-  var token = result.credential.accessToken;
-
-  var user = result.user;
-
-}).catch(function(error) {
-
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  var email = error.email;
-  var credential = error.credential;
-});
-}
-function googlogin(){
-  var provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
-
-   firebase.auth().signInWithRedirect(provider);
-	firebase.auth().getRedirectResult().then(function(result)  {
-        if (result.credential) {
-          var token = result.credential.accessToken;
-          document.getElementById('quickstart-oauthtoken').textContent = token;
+function Facebooklogin() {
+    firebase.auth().onAuthStateChanged( function(user){
+        if(user) {
+            login(user);
         } else {
-          document.getElementById('quickstart-oauthtoken').textContent = 'null';
+            var provider = new  firebase.auth.FacebookAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
         }
-        var user = result.user;
-      }).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-         var email = error.email;
-        var credential = error.credential;
-        if (errorCode === 'auth/account-exists-with-different-credential') {
-          alert('You have already signed up with a different auth provider for that email.');
-          // If you are using multiple auth providers on your app you should handle linking
-          // the user's accounts here.
-        } else {
-          console.error(error);
-        }
-      });
+    });
 }
-window.fbAsyncInit = function() {
+
+function facetoken(){
+	window.fbAsyncInit = function() {
     FB.init({
       appId      : '1583806705075141',
       cookie     : true,
       xfbml      : true,
-      version    : '{latest-api-version}'
+      version    : 'v2.8'
     });
       
     FB.AppEvents.logPageView();   
@@ -265,76 +191,40 @@ window.fbAsyncInit = function() {
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     js.src = "//connect.facebook.net/pl_PL/all.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+
+ 
+FB.getLoginStatus(function(response) {
+statusChangeCallback(response);
+});
+FB.login(function(response) {
+  if (response.status === 'connected') {
+    console.log('Logged into your app and Facebook.');
+	window.alert("zalogowano");
+  } else {
+    console.log('The person is not logged into this app or we are unable to tell.'); 
+  }
+});
+}
+
+function Googlelogintest() {
+	gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+	gapi.auth2.init();
+	const googleUser = gapi.auth2.getAuthInstance().currentUser.get();
+	const profile = googleUser.getBasicProfile();
+console.log('googleUser');
+console.log('profile');
+}
+
+
 function logout(){
   firebase.auth().signOut();
 }
-function addevent(){
-	
-	var ref = firebase.database().ref();
-	var user = firebase.auth().currentUser;
-	var eventUser = document.getElementById("event_user").value;
-	var eventName = document.getElementById("event_name").value;
-	var eventStartDate = document.getElementById("event_from").value;
-	var eventEndDate = document.getElementById("event_until").value;
-	var eventText = document.getElementById("event_text").value;
-	var eventLocation = document.getElementById("event_location").value;
-	var eventLink = document.getElementById("event_link").value;
 
-	var postsRef = ref.child("events");
-  var newPostRef = postsRef.push();
-  newPostRef.set({
-    Nazwa: [eventName],
-    DataOd: [eventStartDate],
-    DataDo: [eventEndDate],
-    Opis: [eventText],
-    Lokalizacji: [eventLocation],
-    Autor: [eventUser],	
-	Link: [eventLink]
-  }, function(error){
-            if (error) {
-             console.error(error)
-             return
-            }
-            window.location.replace('index.html');
-            //add upload function here
-			window.alert("Wydarzenie dodane");
-        });
-}
-
-function addmeeting(){
-	
-	var ref = firebase.database().ref();
-	var user = firebase.auth().currentUser;
-	var meetUser = document.getElementById("meet_user").value;
-	var meetName = document.getElementById("meet_name").value;
-	var meetStartDate = document.getElementById("meet_from").value;
-	var meetEndDate = document.getElementById("meet_until").value;
-	var meetText = document.getElementById("meet_text").value;
-	var meetLocation = document.getElementById("meet_location").value;
-
-	var postsRef = ref.child("meetings");
-  var newPostRef = postsRef.push();
-
-  newPostRef.set({
-    Nazwa: [meetName],
-    DataOd: [meetStartDate],
-    DataDo: [meetEndDate],
-    Opis: [meetText],
-    Lokalizacji: [meetLocation],
-    Autor: [meetUser],	
-  }, function(error){
-            if (error) {
-             console.error(error)
-             return
-            }
-            window.location.replace('index.html');
-            //add upload function here
-			window.alert("Spotkanie dodane");
-        });
-}
 function showmeet(){
 	var leadsRef = database.ref('meetings');
 leadsRef.on('value', function(snapshot) {
@@ -368,8 +258,7 @@ function userinfo(){
 	for (var i = 0; i < hobby.length; i++) {
         if (hobby.options[i].selected) selected2.push(hobby.options[i].value);
     }
-	console.log(selected1);
-	firebase.database().ref('users/' + user.uid).set({
+	firebase.database().ref('users/' + user.uid).update({
     username: UserName,
     płeć:plec,
 	hobby:selected2,
@@ -377,5 +266,316 @@ function userinfo(){
   });
   
 };
+		if (UserName !=null) {
+            window.location.replace('editprofile.html');
+            }
+			else{
+			window.alert("kupa");
+             return
+			}
+})
+            
+}
+
+function readevents(){
+	console.log("przeszło readevents");
+	var database = firebase.database();
+	var userId = firebase.auth().currentUser.uid;
+	ref = firebase.database().ref('/users/' + userId);
+
+var database = firebase.database();
+var eventRef = database.ref('users/' + userId);
+i=0;
+var meeti=[];
+var eventi=[];
+eventRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+    var childData = childSnapshot.val();
+	var elo=snapshot.numChildren();
+	   meeti[i] = childData.Meetings;
+	   eventi[i] = childData.Events;
+	   i++;
+	   });
+	   test(meeti,eventi);
+});
+
+
+}
+
+function test(meeti,eventi){
+	
+	var a=meeti;
+	var b=a.filter(Boolean);
+	console.log(b)
+	var c=eventi;
+	var d=c.filter(Boolean);
+	console.log(d)	
+	findevent(d)
+	findmeeting(b)
+}
+
+function addevent(title,loc,link,zuser,date,datetime,email,phone){
+	
+	var ref = firebase.database().ref();
+    var user = firebase.auth().currentUser;
+    
+    var titletemp = document.getElementById(title).value;
+    var loctemp = document.getElementById(loc).value;
+    var eventLink = document.getElementById(link).value;
+
+    var userName = document.getElementById(zuser).value;
+	var eventStartDate = document.getElementById(date).value;
+    var eventEndDate = document.getElementById(datetime).value;
+    var userMail = document.getElementById(email).value;
+    var userPhone = document.getElementById(phone).value;
+
+    var myRef = ref.child("events");
+
+    var newData={
+        Title: titletemp,
+        Location: loctemp,
+        Link: eventLink,
+        Date: eventStartDate,
+        DateTime: eventEndDate,
+        UserName: userName,
+        Email : userMail,
+        Phone : userPhone
+    }
+    
+    myRef.push(newData);
+	alert("Wydarzenie utworzone!");
+			
+	
+}
+function addmeetings(title1,loc1,link1,zuser1,date1,datetime1,email1,phone1){
+	
+	var ref = firebase.database().ref();
+    var user = firebase.auth().currentUser;
+    
+    var titletemp = document.getElementById(title1).value;
+    var loctemp = document.getElementById(loc1).value;
+    var eventLink = document.getElementById(link1).value;
+
+    var userName = document.getElementById(zuser1).value;
+	var eventStartDate = document.getElementById(date1).value;
+    var eventEndDate = document.getElementById(datetime1).value;
+    var userMail = document.getElementById(email1).value;
+    var userPhone = document.getElementById(phone1).value;
+
+    var myRef = ref.child("meetings");
+
+    var newData={
+        Title: titletemp,
+        Location: loctemp,
+        Link: eventLink,
+        Date: eventStartDate,
+        DateTime: eventEndDate,
+        UserName: userName,
+        Email : userMail,
+        Phone : userPhone
+    }
+    
+    myRef.push(newData);
+	alert("Spotkanie dodane!");
+			
+}
+var ref = firebase.database().ref();
+var myRef = ref.child("meetings");
+function showmeetings(){
+var database = firebase.database();
+var eventRef = database.ref('events');
+var meetRef = database.ref('meetings');
+
+
+var kluczme=[];
+	  var meettitle = [];
+	  var meetemail = [];
+	  var meetUserName = [];
+	  var meetDate = [];
+	  var meetDateTime = [];
+	  var meetLocation = [];
+	  var meetPhone = [];
+var kluczev=[];
+	  var eventtitle = [];
+	  var eventemail = [];
+	  var eventUserName = [];
+	  var eventDate = [];
+	  var eventDateTime = [];
+	  var eventLocation = [];
+	  var eventPhone = [];
+var i=0;
+eventRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+	  kluczev[i] = childSnapshot.key;
+
+	   eventtitle[i] = childData.Title
+	   eventemail[i] = childData.Email
+	   eventUserName[i] = childData.UserName
+	   eventDate[i] = childData.Date
+	   eventDateTime[i] = childData.DateTime
+	   eventLocation[i] = childData.Location
+	   eventPhone[i] = childData.Phone
+i++;
+    });
+	zmienne(kluczev,eventtitle,eventemail,eventUserName,eventDate,eventDateTime,eventLocation,eventPhone);
+});
+
+var j=0;
+meetRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+	  kluczme[j] = childSnapshot.key;
+	   meettitle[j] = childData.Title
+	   meetemail[j] = childData.Email
+	   meetUserName[j] = childData.UserName
+	   meetDate[j] = childData.Date
+	   meetDateTime[j] = childData.DateTime
+	   meetLocation[j] = childData.Location
+	   meetPhone[j] = childData.Phone
+			j++;
+    });
+	zmienne1(kluczme,meettitle,meetemail,meetUserName,meetDate,meetDateTime,meetLocation,meetPhone);
+});
+}
+
+function zmienne1(kluczev,eventtitle,eventemail,eventUserName,eventDate,eventDateTime,eventLocation,eventPhone){
+	eventtable(kluczev,eventtitle,eventemail,eventUserName,eventDate,eventDateTime,eventLocation,eventPhone);
+}
+function zmienne(kluczme,meettitle,meetemail,meetUserName,meetDate,meetDateTime,meetLocation,meetPhone){
+	meettable1(kluczme,meettitle,meetemail,meetUserName,meetDate,meetDateTime,meetLocation,meetPhone);
+}
+function eventtable(kluczev,eventtitle,eventemail,eventUserName,eventDate,eventDateTime,eventLocation,eventPhone){
+var ref = firebase.database().ref();
+ref.child("meetings").on("value", function(snapshot) {
+
+var elo=snapshot.numChildren();
+console.log(elo+" meetings");
+	for(var i=0; i<elo;i++){
+			$("#tabelkaevent").append("<div id='test12'>Nazwa wydarzenia:<p>" + eventtitle[i] + "</p>Email:<p>" + eventemail[i] + "</p>Uzytkownik:<p>" + eventUserName[i] +"</p>Data<p>" 
+			+ eventDate[i] +"</p><p>" + eventDateTime[i] +"</p>Lokalizacja:<p>" + eventLocation[i] + "</p>Telefon:<p>" + eventPhone[i] + '</p><p class="klucz" hidden>' + kluczev[i]
+		+'</p><p><button class="btn" >Dołącz</button></p></div>');
+	}
 })
 }
+function meettable1(kluczme,meettitle,meetemail,meetUserName,meetDate,meetDateTime,meetLocation,meetPhone){
+var ref = firebase.database().ref();
+ref.child("events").on("value", function(snapshot) {
+
+var elo=snapshot.numChildren();
+console.log(elo+" events");
+	for(var i=0; i<elo;i++){
+			$("#tabelkam").append("<div id='test12'>Nazwa spotkania:<p>" + meettitle[i] + "</p>Email:<p>" + meetemail[i] + "</p>Uzytkownik:<p>" + meetUserName[i] +"</p>Data<p>" 
+			+ meetDate[i] +"</p><p>" + meetDateTime[i] +"</p>Lokalizacja:<p>" + meetLocation[i] + "</p>Telefon:<p>" + meetPhone[i] + '</p><p value="heh" class="klucz" hidden>' + kluczme[i]
+		+'</p><p><button class="btn" >Dołącz</button></p></div>');
+		//document.getElementById("mattednbtn").value = kluczme[i];
+	}
+})
+}
+function attendevent(data){
+	
+	var database = firebase.database();
+	var meetuser = database.ref('meetings');
+	var ref = firebase.database().ref();
+	
+	var database = firebase.database();
+	var userId = firebase.auth().currentUser.uid;
+	var user = firebase.auth().currentUser;
+	var refer=firebase.database().ref('/users/' + userId )
+    
+	var eventkey =data;	
+    var newData={
+	Events: eventkey
+	}
+    console.log("event dodany");
+	alert("Dołączono do wydarzenia!");
+    refer.push(newData);
+	
+	
+}
+	
+
+function attendmeeting(data){
+	var database = firebase.database();
+	var userId = firebase.auth().currentUser.uid;
+	
+	var refer=firebase.database().ref('/users/' + userId)
+	
+    var user = firebase.auth().currentUser;
+	var eventkey =data;
+	//var eventkey = document.getElementById("mattednbtn").value
+    var newData={
+	Meetings: eventkey
+	}
+    console.log("meeting dodany");
+	alert("Dołączono do spotkania!");
+    refer.push(newData);
+	
+}
+function showstart(){
+	showevents1();
+	showmeetings();
+}
+function showevents1(){
+	var ref = firebase.database().ref();
+	ref.once('value', function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    var childKey = childSnapshot.key;
+    var childData = childSnapshot.val();
+    // ...
+  });
+});
+	console.log(childKey);
+	console.log(childData);
+}
+function writetabelkam(hejo,meettitle,meetemail,meetUserName,meetDate,meetDateTime,meetLocation,meetPhone){
+			$("#tabelkam").append("<tr><td>" + meettitle + "</td><td>" + meetemail + "</td><td>" + meetUserName +"</td><td>" 
+			+ meetDate +"</td><td>" + meetDateTime +"</td><td>" + meetLocation + "</td><td>" + meetPhone 
+			+"</td><td>" + hejo + "</td></tr>");
+		}
+
+function findevent(klucz){
+	var rootRef = firebase.database().ref('meetings');
+	var heh=[];
+	var meh=[];
+	for (var i=0;i<klucz.length;i++){
+		var hehe=klucz[i];
+        
+			rootRef.child(hehe).once('value',function(snapshot){
+				var j=0;
+            snapshot.forEach(function(childSnapshot) {
+				meh[j]=childSnapshot.val();
+				j++;
+            })
+			writetabelmeet(heh,meh);
+        });
+	}
+}
+function writetabelmeet(heh,meh){
+	$("#tabelmeet").append('<div id="test12">Nazwa spotkania:<p>' + meh[6] + "</p>Email:<p>" + meh[2] + "</p>Uzytkownik:<p>" + meh[7] +"</p>Data<p>" 
+			+ meh[0] +"</p><p>" + meh[1] +"</p>Lokalizacja:<p>" + meh[4] + "</p>Telefon:<p>" + meh[5]+'</p></div>');
+}
+function findmeeting(klucz){
+	var rootRef = firebase.database().ref('events');
+	var heh=[];
+	var meh=[];
+	for (var i=0;i<klucz.length;i++){
+		var hehe=klucz[i];
+        
+			rootRef.child(hehe).once('value',function(snapshot){
+				var j=0;
+            snapshot.forEach(function(childSnapshot) {
+				meh[j]=childSnapshot.val();
+				j++;
+            })
+			writetabelev(heh,meh);
+        });
+	}
+}
+function writetabelev(heh,meh){
+
+	$("#tabelev").append('<div id="test12">Nazwa Wydarzenia:<p>' + meh[6] + "</p>Email:<p>" + meh[2] + "</p>Uzytkownik:<p>" + meh[7] +"</p>Data<p>" 
+			+ meh[0] +"</p><p>" + meh[1] +"</p>Lokalizacja:<p>" + meh[4] + "</p>Telefon:<p>" + meh[5]+'</p></div>');
+
+}
+

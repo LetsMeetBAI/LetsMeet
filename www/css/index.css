@@ -1,162 +1,312 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-* {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+/* --------------- reset.css --------------- */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, u, i,  dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;                               /* обнуляем отступы и убираем бордюры */
+  vertical-align: baseline;          /* приводим все к одной базовой линии */
+  background: transparent;      /* чтобы не проскакивали левые фоны, установленные по умолчанию */
+  font-size: 100%;                     /* размер шрифта всем одинаковый */
 }
+a {                                            /* ссылка не в общем списке чтобы не сбрасывать outline по умолчанию */
+  margin:0;
+  padding:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+  outline:none;
+}
+table {           /* устраняем отступы между ячейками таблицы */
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td, td img {
+  vertical-align: top;      /* возвращаем привычное вертикальное выравнивание */
+}
+input, select, button, textarea {
+  margin: 10px 20px;        /* убираем отступы по умолчанию для элементов форм (в частности для checkbox и radio) */
+  font-size: 100%;      /* делаем размер шрифтов везде одинаковым */
+  outline: none;
+  border:1px solid #d3d3d3;
+  border-radius:5.5px;
+  width:274px;
+  height:84px;
+  padding: 0px 20px;
 
+}
+textarea {
+  padding: 10px 20px;
+  height: 200px;         /* убираем внутренние отступы для текстовых полей */
+}
+input[type="checkbox"] {    /* вертикальное выравнивание чекбоксов и радиобатонов относительно меток */
+  vertical-align: bottom;
+}
+input[type="radio"] {
+  vertical-align: text-bottom;
+}
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display:block;
+}
+nav ul {
+   list-style:none;
+}
+/* --------------- /reset.css --------------- */
+
+/* --------------- базовые настройки ---------*/
+html {
+  min-height:100%; /* всегда показываем вертикальную полосу прокрутки  */
+}
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
-    background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    text-transform:uppercase;
-    width:100%;
+  color: #7e7f84;
+  text-align: left;
+  font-size: 1em; /* используем безопасные шрифтовые CSS стеки */
+  min-height:100%;
+  font-family: 'Noto Sans', sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+}
+a, a:visited { /* порядок правил для ссылок имеет значение */
+  color: #f45a40;
+  text-decoration: none;
+}
+a:hover {
+  color: #f45a40;
+  text-decoration:none;
+}
+a:focus, a:active {
+  color: #f45a40;
+  text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6{
+  font-weight:normal;
 }
 
-/* Portrait layout (default) */
-.app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+.clr{
+  clear:both;
+}
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: table;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
-}
+
+
+/* --------------- мои настройки ---------*/
 
 h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+  font-family:NotoSans-Bold;
+font-size:35px;
+color:#267dce;
+text-align:center;
 }
 
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+.main-div h1 {
+  margin-bottom: 30px;
+}
+img{
+  margin: 20px;
+  max-width:100%;
 }
 
-.event.listening {
-    background-color:#333333;
-    display:block;
+.main_wrap{
+  width: 100%;
+  display: inline-block;
+  text-align: center;
 }
 
-.event.received {
-    background-color:#4B946A;
-    display:none;
-}
-
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
-}
-
-.main-div, .loggedin-div {
-  width: 20%;
-  margin: 0px auto;
+.main-div {
   margin-top: 150px;
-  padding: 20px;
-  display: none;
 }
 
-.main-div input {
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #fff;
-  padding: 15px;
-  outline: none;
-  width: 100%;
-  margin-bottom: 20px;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-}
-
-.main-div input:focus {
-  border: 1px solid #777;
-}
-
-.main-div button, .loggedin-div button {
-  background: #5d8ffc;
-  color: #fff;
-  border: 1px solid #5d8ffc;
-  border-radius: 5px;
-  padding: 15px;
-  display: block;
-  width: 100%;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-}
-
-
-.main-div button:hover, .loggedin-div button:hover {
-  background: #fff;
-  color: #5d8ffc;
-  border: 1px solid #5d8ffc;
+.btn {
+  background:#267dce;
+  box-shadow:0 4px 14px 0 rgba(38,125,206,0.43);
+  border-radius:10px;
+  width:250px;
+  height:50px;
+  color:#fff;
+  margin: 10px 20px;
+  transition: ease all 0.4s;
   cursor: pointer;
 }
+.btn:hover {
+  box-shadow:none;
+  transition: ease all 0.4s;
+}
+.btn:active{
+  background:#1E609D;
+  transition: ease all 0.4s;
+}
+
+.loggedin-div {
+ /* border: 1px red solid;*/
+  margin-top: 80px;
+}
+
+#user_div {
+  margin-top: 100px;
+}
+.card {
+  background:#ffffff;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+  border-radius:16px;
+  width:320px;
+  height:auto;
+  display: inline-block;
+  margin: 10px 10px;
+  padding-top: 40px;
+  transition: ease all 0.4s; 
+}
+.card:hover{
+  box-shadow: none;
+  transition: ease all 0.4s;
+}
+.card-top{
+  margin-bottom: 20px;
+  
+}
+.card p {
+  margin: 20px 40px; 
+}
+.stickhead {
+  background:#ffffff;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+  width:100%;
+  height:65px;
+  position: fixed;
+  top:0px;
+}
+.stickhead a{
+  float: right;
+  padding: 23px;
+  
+  line-height: 20px;
+  color:#4a4a4a;
+  transition: ease all 0.4s;
+}
+
+.stickhead a:hover{
+  background:#eee;
+  transition: ease all 0.4s;
+}
+
+.stickhead a img{
+  margin: 0px;
+  margin-right: 10px;
+
+}
+
+.showpage{
+  background:#ffffff;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+  border-radius:16px;
+  width:auto;
+  height:auto;
+  margin: 10px 10px;
+  padding-top: 40px;
+  transition: ease all 0.4s;
+  border-spacing: 2cm;
+  border-style:double;
+}
+
+#test12 {
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  border-radius:16px;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+  width:320px;
+  height:auto;
+  display: inline-block;
+  margin: 20px 20px;
+  padding-top: 30px;
+  transition: ease all 0.4s; 
+  width:auto;
+  height:auto;
+  text-align: center;
+  text-transform: none;
+  
+}
+
+#test12 p{
+
+  background-image: linear-gradient(to right, blue, black);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-transform: uppercase;
+  line-height: 30px;
+  
+  
+  
+}
+
+.result-list{
+  background: #fbffea;
+}
+
+.user_di{
+  background: linear-gradient( 90deg,
+      rgba(0,0,0,.1) 30%, rgba(0,0,0,0) 30%),
+    linear-gradient( 
+      rgba(255,255,0,.8), rgba(255,255,255,0));
+    background-size: 2em 2em, 100%;
+    background-color: yellowgreen;
+    color: rgb(217, 54, 250);
+  border-radius:16px;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+}
+
+.main-user{
+  background: #dadce4;
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+  border-radius:16px;
+  width:500px;
+  height:auto;
+  display: inline-block;
+  margin: 10px auto;
+  padding-top: 40px;
+  transition: ease all 0.4s; 
+}
+/* .tabelkaevent{
+  background: rgb(211, 255, 190);
+  box-shadow:0 10px 25px 0 rgba(0,0,0,0.15);
+  border-radius:16px;
+  width:320px;
+  height:auto;
+  display: inline-block;
+  margin: 20px 20px;
+  padding-top: 30px;
+  transition: ease all 0.4s; 
+  width:auto;
+  height:auto;
+  text-align: center;
+  text-transform: none;
+  border: #267dce
+
+} */
+/* .tabelkaevent p{
+
+  background-image: linear-gradient(to right, blue, black);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-transform: uppercase;
+} */
+/*#set {
+  background-image: url(img/set.png);
+  display: block;
+  margin: 0 auto;
+}*/
+
