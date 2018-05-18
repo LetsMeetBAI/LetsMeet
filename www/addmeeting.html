@@ -3,6 +3,16 @@
 		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>var config = {
+    apiKey: "AIzaSyAxteQnfJWDilWg9SoCPX9kpB3RkTutde4",
+    authDomain: "letmeet-bai.firebaseapp.com",
+    databaseURL: "https://letmeet-bai.firebaseio.com",
+    projectId: "letmeet-bai",
+    storageBucket: "letmeet-bai.appspot.com",
+    messagingSenderId: "688044304067"
+  };
+  firebase.initializeApp(config);</script>
 		<meta http-equiv="Content-Security-Policy" content="script-src * data: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
@@ -15,34 +25,31 @@
 		<link rel="manifest" href="/manifest.json">
 </head>
 <body>
-  <script src="index.js"></script>
+  <script src="js/index.js"></script>
   <div id="login_div" class="main-div">
-    <h3>Let's Meet!</h3>
-    <button id="tologinbtn">Login to Account</button>
-  </div>
-	<div id="user_div" class="loggedin-div">
-    <h3>Lets Meet!</h3>
-	<p id="user_para"></p>
+		<div class="stickhead">
+				<a onclick="userinfopage()"><img src="img/set.png" alt="">Settings</a>
+				<a onclick="logout()"><img src="img/user.png" alt="">log out</a>
+				<a onclick="toindexpage()">Main Page</a>
+			</div> 
+			<h1>Dodaj nowe spotkanie!</h1>
+			<div class="main_wrap">
+			<div class="main-user">
 	
-	<h4></h4>
-	<input type="text" placeholder="Nazwa użytkownika" id="meet_user"  />
-	<p></p>
-	<input type="text" placeholder="Tytuł spotkania" id="meet_name" />
-	<p></p>
-	Ważne od...<input type="datetime-local"  id="meet_from" />
-	<p></p>
-	Ważne do...<input type="datetime-local"  id="meet_until" />
-	<p></p>
-	<textarea rows="4" cols="50" placeholder="Krótki opis" id="meet_text" /></textarea>
-	<p></p>
-	<input type="text" placeholder="Lokalizacja" id="meet_location" />
-	<p></p>
-	<button onclick="addmeeting()">Zapisz Spotkanie</button>
-	<p></p>
-	<button onclick="toindexpage()">Wstecz</button>
+			<input type="text" placeholder="Tytuł spotkania i cena" id="MeetTitle">
+			<input type="text" placeholder="Nazwa użytkownika" id="MeetUName">
+			<input type="text" placeholder="Lokalizacja" id="MeetLoc">
+			<textarea rows="4" cols="50" placeholder="Krótki opis spotkania" id="MeetLink"></textarea><br>
+			<p>Spotkanie dostępne od: </p>
+			<input type="date" id="MeetDate">
+			<p>Do: </p>
+			<input type="date" id="MeetTime">
+			
+			<input type="text" placeholder="Adres E-mail"  id="MeetEmail">
+			<input type="text" placeholder="Numer telefonu" id="MeetPhone">
+			<button id="BtnSave" class="btn" onclick='addmeetings("MeetTitle","MeetLoc","MeetLink","MeetUName","MeetDate","MeetTime","MeetEmail","MeetPhone")'>Save</button>
 	<p></p>
 	<p></p>
-	<button onclick="logout()">Logout</button>
 	</div>
 </body>
 </html>
