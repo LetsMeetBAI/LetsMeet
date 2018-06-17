@@ -11,6 +11,6 @@
 <br>Igor Kubrak
 <br>Krzysztof Kłos
 
-<br><a target="_blank" href="https://github.com/LetsMeetBAI/LetsMeet/blob/master/LetsMeet.pdf">Link do prototypu
+<br><a target="_blank" href="https://marvelapp.com/30g1gdg/screen/44181773">Link do prototypu
 <br><a target="_blank" href="https://trello.com/b/y8X8UsU0/aplikacja-letsmeet"> Link do Trello
 <br><a target="_blank" href="https://github.com/LetsMeetBAI/LetsMeet/blob/master/BAI%20-%20wykaz%20godzin.xlsx"> Link do Raportu prac członków zespołu
